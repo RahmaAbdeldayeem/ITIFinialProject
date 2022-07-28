@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CenterAppWeb.ViewModel.LevelMatrialStagesVM
+
+@{
+    ViewData["Title"] = "AddingToLevel";
+}
+
+
+<p>
+     <a asp-action="Create" asp-controller="Stages" asp-route-id="@Model.Level_Id"  class="btn btn-lg btn-outline-success">Create New Stage</a>
+    <a asp-action="Create" asp-controller="Matrials" asp-route-id="@Model.Level_Id" class="btn btn-lg btn-outline-warning">Create New Matrials</a>
+</p>
+<h1>Stages</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stages)
+        </th>
+          
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Stages) {
+       
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem =>item.Stage_Name )
+                </td>
+            
+            </tr>
+        
+        
+    }
+    </tbody>
+</table>
+<h1>Matrials</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelMatrials)
+            </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LevelMatrials) {
+    
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem =>item.Matrial.Matrial_Name )
+            </td>
+            
+        </tr>
+      
+}
+    </tbody>
+</table>

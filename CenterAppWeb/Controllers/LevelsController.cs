@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CenterApp.Core.Models;
 using CenterApp.Infrasturcture.Data;
+using CenterAppWeb.ViewModel;
 
 namespace CenterAppWeb.Controllers
 {
@@ -22,11 +23,24 @@ namespace CenterAppWeb.Controllers
         // GET: Levels
         public async Task<IActionResult> Index()
         {
-              return _context.Levels != null ? 
-                          View(await _context.Levels.ToListAsync()) :
-                          Problem("Entity set 'CenterDBContext.Levels'  is null.");
+            return _context.Levels != null ?
+                        View(await _context.Levels.ToListAsync()) :
+                        Problem("Entity set 'CenterDBContext.Levels'  is null.");
         }
 
+        public async Task<IActionResult> AddingToLevel(int id)
+        {
+            var LstLevels = _context.Levels.Where(x => x.Level_Id == id);
+
+            var LevelVM = new LevelMatrialStagesVM()
+            {
+                Level_Id = id,
+                Stages = _context.Stages.Where(x => x.Level_Id == id).ToList(),
+                LevelMatrials = _context.LevelMatrial.Where(x => x.Level_Id == id).Include(x=>x.Matrial).ToList(),
+
+            };
+            return View(LevelVM);
+        }
         // GET: Levels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,11 +70,11 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Level_Id,Level_Name")] Level level)
+        public async Task<IActionResult> Create(Level level)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(level);
+                _context.Levels.Add(level);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -150,14 +164,14 @@ namespace CenterAppWeb.Controllers
             {
                 _context.Levels.Remove(level);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LevelExists(int id)
         {
-          return (_context.Levels?.Any(e => e.Level_Id == id)).GetValueOrDefault();
+            return (_context.Levels?.Any(e => e.Level_Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -20,9 +20,9 @@ namespace CenterAppWeb.Controllers
         }
 
         // GET: Stages
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int level_id)
         {
-            var centerDBContext = _context.Stages.Include(s => s.Level);
+            var centerDBContext = _context.Stages.Where(x => x.Level_Id == level_id);
             return View(await centerDBContext.ToListAsync());
         }
 
@@ -46,9 +46,10 @@ namespace CenterAppWeb.Controllers
         }
 
         // GET: Stages/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["Level_Id"] = new SelectList(_context.Levels, "Level_Id", "Level_Name");
+            ViewBag.LevelID = id;
+            // ViewData["Level_Id"] = new SelectList(_context.Levels, "Level_Id", "Level_Name");
             return View();
         }
 
@@ -57,13 +58,13 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Stage_Id,Stage_Name,Level_Id")] Stage stage)
+        public async Task<IActionResult> Create(Stage stage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(stage);
+                _context.Stages.Add(stage);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("AddingToLevel", "Levels",new {id= stage.Level_Id});
             }
             ViewData["Level_Id"] = new SelectList(_context.Levels, "Level_Id", "Level_Name", stage.Level_Id);
             return View(stage);
@@ -155,14 +156,14 @@ namespace CenterAppWeb.Controllers
             {
                 _context.Stages.Remove(stage);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StageExists(int id)
         {
-          return (_context.Stages?.Any(e => e.Stage_Id == id)).GetValueOrDefault();
+            return (_context.Stages?.Any(e => e.Stage_Id == id)).GetValueOrDefault();
         }
     }
 }
