@@ -22,9 +22,9 @@ namespace CenterAppWeb.Controllers
         // GET: Matrials
         public async Task<IActionResult> Index()
         {
-              return _context.Matrials != null ? 
-                          View(await _context.Matrials.ToListAsync()) :
-                          Problem("Entity set 'CenterDBContext.Matrials'  is null.");
+            return _context.Matrials != null ?
+                        View(await _context.Matrials.ToListAsync()) :
+                        Problem("Entity set 'CenterDBContext.Matrials'  is null.");
         }
 
         // GET: Matrials/Details/5
@@ -46,8 +46,9 @@ namespace CenterAppWeb.Controllers
         }
 
         // GET: Matrials/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            ViewBag.Level_Id = id;
             return View();
         }
 
@@ -56,13 +57,35 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Matrial_Id,Matrial_Name")] Matrial matrial)
+        public async Task<IActionResult> Create(Matrial matrial, int id)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(matrial);
+                var martialExist =
+                    _context.Matrials.Where(x => x.Matrial_Name.ToLower() == matrial.Matrial_Name.ToLower());
+                if (martialExist.Count()<=0)
+                {
+                    _context.Matrials.Add(matrial);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    ViewBag.error = "This Matrial Is Exists ";
+                    return View(matrial);
+                }
+
+                var lstLevelMatrials =
+                    _context.LevelMatrial.Where(x => x.Level_Id == id && x.Matrial_Id == matrial.Matrial_Id);
+                if (lstLevelMatrials.Count()<=0)
+                    _context.LevelMatrial.Add(new LevelMatrial() { Level_Id = id, Matrial_Id = matrial.Matrial_Id });
+                else
+                {
+                    ViewBag.error = "This Matrial Is Exists ";
+                    return View(matrial);
+                }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("AddingToLevel", "Levels", new { id = id });
+
             }
             return View(matrial);
         }
@@ -150,14 +173,14 @@ namespace CenterAppWeb.Controllers
             {
                 _context.Matrials.Remove(matrial);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MatrialExists(int id)
         {
-          return (_context.Matrials?.Any(e => e.Matrial_Id == id)).GetValueOrDefault();
+            return (_context.Matrials?.Any(e => e.Matrial_Id == id)).GetValueOrDefault();
         }
     }
 }

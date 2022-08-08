@@ -5,13 +5,17 @@
 }
 
 <h1>Create</h1>
-
+@if (ViewBag.error != null)
+{
+    <h3 class=" alert alert-danger">@ViewBag.error</h3>
+}
 <h4>Matrial</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input name="Level_Id" value="@ViewBag.Level_Id" hidden/>
             <div class="form-group">
                 <label asp-for="Matrial_Name" class="control-label"></label>
                 <input asp-for="Matrial_Name" class="form-control" />
