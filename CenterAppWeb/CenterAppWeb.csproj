@@ -17,6 +17,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\TeacherMatrials\Create.cshtml" />
+    <None Include="Views\TeacherMatrials\Delete.cshtml" />
+    <None Include="Views\TeacherMatrials\Details.cshtml" />
+    <None Include="Views\TeacherMatrials\Edit.cshtml" />
+    <None Include="Views\TeacherMatrials\Index.cshtml" />
+    <None Include="Views\Teachers\Create.cshtml" />
+    <None Include="Views\Teachers\Delete.cshtml" />
+    <None Include="Views\Teachers\Details.cshtml" />
+    <None Include="Views\Teachers\Edit.cshtml" />
+    <None Include="Views\Teachers\Index.cshtml" />
     <None Include="wwwroot\fonts\Flaticon.svg" />
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\Chart.min.js" />

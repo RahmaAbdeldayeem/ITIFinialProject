@@ -1,0 +1,24 @@
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\bin\Debug\net6.0\CenterApp.Core.deps.json
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\bin\Debug\net6.0\CenterApp.Core.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\bin\Debug\net6.0\CenterApp.Core.pdb
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.csproj.AssemblyReference.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.AssemblyInfoInputs.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.AssemblyInfo.cs
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.csproj.CoreCompileInputs.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\refint\CenterApp.Core.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.pdb
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\ref\CenterApp.Core.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\bin\Debug\net6.0\CenterApp.Core.deps.json
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\bin\Debug\net6.0\CenterApp.Core.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\bin\Debug\net6.0\CenterApp.Core.pdb
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.csproj.AssemblyReference.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.AssemblyInfoInputs.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.AssemblyInfo.cs
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.csproj.CoreCompileInputs.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\refint\CenterApp.Core.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\CenterApp.Core.pdb
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Core\obj\Debug\net6.0\ref\CenterApp.Core.dll

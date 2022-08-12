@@ -1,0 +1,34 @@
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.deps.json
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.runtimeconfig.json
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.pdb
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.csproj.AssemblyReference.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.AssemblyInfoInputs.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.AssemblyInfo.cs
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.csproj.CoreCompileInputs.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\refint\CenterApp.Infrasturcture.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.pdb
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.genruntimeconfig.cache
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\ref\CenterApp.Infrasturcture.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Core.dll
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Core.pdb
+D:\ITI Projects\15- API\1- Lec1\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.csproj.CopyComplete
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.deps.json
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.runtimeconfig.json
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Infrasturcture.pdb
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Core.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\bin\Debug\net6.0\CenterApp.Core.pdb
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.csproj.AssemblyReference.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.AssemblyInfoInputs.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.AssemblyInfo.cs
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.csproj.CoreCompileInputs.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.csproj.CopyComplete
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\refint\CenterApp.Infrasturcture.dll
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.pdb
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\CenterApp.Infrasturcture.genruntimeconfig.cache
+D:\ITI Projects\Project\ITIFinialProject\CenterApp.Infrasturcture\obj\Debug\net6.0\ref\CenterApp.Infrasturcture.dll

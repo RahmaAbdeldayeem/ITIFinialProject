@@ -48,8 +48,19 @@
             @Html.DisplayFor(model => model.Teacher_BirthOfDate)
         </dd>
     </dl>
+   @* <div>
+    <h4>Teacher</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher_Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Teacher_Name)
+        </dd>
+    </dl>*@
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" >
         <input type="hidden" asp-for="Teacher_Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>

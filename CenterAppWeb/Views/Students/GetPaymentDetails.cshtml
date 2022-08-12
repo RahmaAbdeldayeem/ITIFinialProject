@@ -1,0 +1,45 @@
+﻿@using CenterAppWeb.ViewModel;
+@model IEnumerable<PaymentStatus>;
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Material Name</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Month</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.MaterialName</td>
+                    @if (item.IsPaid)
+                    {
+                        <td><i class="fa fa-solid fa-check" style="color:green;"></i></td>
+                    }
+                    else
+                    {
+                        <td><span style="color:red;">X</span></td>
+                    }
+                    <td>@item.Price</td>
+                    <td>@item.Date</td>
+
+                    <td><a asp-action="DeletePayment" asp-route-id="@item.Id">Delete</a></td>
+                    <td><a asp-action="EditPayment" asp-route-id="@item.Id">Edit</a></td>
+                </tr>
+
+            }
+
+
+
+        </tbody>
+
+    </table>
+
+</div>

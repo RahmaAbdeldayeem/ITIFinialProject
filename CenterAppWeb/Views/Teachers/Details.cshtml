@@ -3,52 +3,131 @@
 @{
     ViewData["Title"] = "Details";
 }
+ <div class="dashboard-content-one">
+                <!-- Breadcubs Area Start Here -->
+                <div class="breadcrumbs-area">
+                    <h3>Teacher</h3>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>Teacher Details</li>
+                    </ul>
+                </div>
+                <!-- Breadcubs Area End Here -->
+                <!-- Student Table Area Start Here -->
+                <div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>About Me</h3>
+                            </div>
+                           
+                        </div>
+                        <div class="single-info-details">
+                            <div class="item-img">
+                                <img src="img/figure/teacher.jpg" alt="teacher">
+                            </div>
+                            <div class="item-content">
+                                <div class="header-inline item-header">
+                                    <h3 class="text-dark-medium font-medium">@Model.Teacher_Name</h3>
+                                </div>
+                                <p>Aliquam erat volutpat. Curabiene natis massa sedde lacu stiquen sodale 
+                                word moun taiery.Aliquam erat volutpaturabiene natis massa sedde  sodale 
+                                word moun taiery.</p>
+                                <div class="info-table table-responsive">
+                                    <table class="table text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td class="font-medium text-dark-medium">@Model.Teacher_Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Specilist:</td>
+                                                <td class="font-medium text-dark-medium">@Model.Teacher_Specilist</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Age:</td>
+                                                <td class="font-medium text-dark-medium">@Model.Teacher_BirthOfDate</td> @* calc age of teacher*@
+                                            </tr>
+                                            <tr>
+                                                <td>E-mail:</td>
+                                                <td class="font-medium text-dark-medium">@Model.Teacher_Email</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td class="font-medium text-dark-medium">@Model.Teacher_Phone</td>
+                                            </tr>
+                                           
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
 
-<h1>Details</h1>
-
-<div>
-    <h4>Teacher</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher_Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher_Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher_Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher_Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher_Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher_Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher_Specilist)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher_Specilist)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher_Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher_Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher_BirthOfDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher_BirthOfDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Teacher_Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+@*
+ <div class="single-info-details">
+                           @* <div class="item-img">
+                                <img src="img/figure/teacher.jpg" alt="teacher">
+                            </div>
+                            <div class="item-content">
+                                <div class="header-inline item-header">
+                                    <h3 class="text-dark-medium font-medium">@Html.DisplayNameFor(model => model.Teacher_Name)</h3>
+                                    <div class="header-elements">
+                                        <ul>
+                                            <li><a href="#"><i class="far fa-edit"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-print"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-download"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p>Aliquam erat volutpat. Curabiene natis massa sedde lacu stiquen sodale 
+                                word moun taiery.Aliquam erat volutpaturabiene natis massa sedde  sodale 
+                                word moun taiery.</p>
+                                <div class="info-table table-responsive">
+                                    <table class="table text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.Teacher_Name)</td>
+                                            </tr>
+                                           
+                                            <tr>
+                                                <td>phone:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.Teacher_Phone)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>specilist:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.Teacher_Specilist)</td>
+                                            </tr>
+                                           
+                                            <tr>
+                                                <td>Birth of Date:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.Teacher_BirthOfDate)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>E-mail:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.Teacher_Email)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Subject:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.TeacherMatrial)</td>
+                                            </tr>
+                                          
+                                           
+                                            <tr>
+                                                <td>ID No:</td>
+                                                <td class="font-medium text-dark-medium">@Html.DisplayNameFor(model => model.Teacher_Id)</td>
+                                            </tr>
+                                           
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>*@

@@ -1,0 +1,39 @@
+﻿@using CenterAppWeb.ViewModel;
+@model PaymentVM;
+<div class="container text-center">
+
+    <h1>Student Payment</h1>
+    <form method="post" asp-action="payForSupject"  > 
+
+        <div class="form-group">
+            <span>Student</span>
+            <select asp-for="StudentId"
+                    class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Students, "Student_Id", "Student_Name"))">
+            </select>
+        </div>
+        <div class="form-group">
+            <span>Material</span>
+            <select asp-for="MateriaId"
+                    class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Materials, "Matrial_Id", "Matrial_Name"))">
+            </select>
+        </div>
+        <div class="form-group">
+            <span>Price</span>
+            <input class="form-control" asp-for="Price"  />
+        </div>
+        <div class="form-group">
+            <span>Date</span>
+            <input class="form-control" asp-for="Date" type="date"  />
+        </div>
+        <div class="form-group">
+            <span>Is Paid</span>
+            <input type="checkbox" asp-for="IsPaid" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary"  type="submit">Save</button>
+        </div>
+    </form>
+
+</div>

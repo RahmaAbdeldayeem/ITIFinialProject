@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CenterApp.Core.Models.Teacher>
+﻿@model TeacherSearchIndexVM
 
 @{
     ViewData["Title"] = "Index";
@@ -9,32 +9,46 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+ @*<form class="mg-b-20" asp-action="Index" method="post">
+                            <div class="row gutters-8">
+                                <div class="col-3-xxxl col-xl-3 col-lg-4 col-12 form-group">
+                                    <input type="text" asp-for="SearchByName" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
+                                    <input type="text" asp-for="SearchBySubject" placeholder="Search by Subject  ..." class="form-control">
+                                </div>
+                                
+                                <div class="col-1-xxxl col-xl-2 col-lg-4 col-12 form-group">
+                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+   </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher_Name)
+                @Html.DisplayName("Teacher_Name")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher_Phone)
+                @Html.DisplayName("Teacher_Phone")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher_Email)
+                @Html.DisplayName("Teacher_Email")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher_Specilist)
+                @Html.DisplayName("Teacher_Specilist")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher_Image)
+                @Html.DisplayName("Teacher_Image")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher_BirthOfDate)
+                @Html.DisplayName("Teacher_BirthOfDate")
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Teachers) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Teacher_Name)
@@ -60,6 +74,108 @@
                 <a asp-action="Delete" asp-route-id="@item.Teacher_Id">Delete</a>
             </td>
         </tr>
-}
+}*@
+
+<div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Teachers Data</h3>
+                            </div>
+                           <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" 
+                                data-toggle="dropdown" aria-expanded="false">...</a>
+        
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="mg-b-20" asp-action="Index" method="post">
+                            <div class="row gutters-8">
+                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text"  asp-for="SearchByID" placeholder="Search by Id ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <input type="text" asp-for="SearchByName" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" asp-for="SearchByPhone" placeholder="Search by phone ..." class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th> 
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">@Html.DisplayName("Teacher_Id")</label>
+                                            </div>
+                                        </th>
+                                        <th>@Html.DisplayName("Teacher_Image")</th>
+                                        <th>@Html.DisplayName("Teacher_Name")</th>
+                                        <th>@Html.DisplayName("Teacher_Phone")</th>
+                                        <th>@Html.DisplayName("Teacher_Email")</th>
+                                        <th>@Html.DisplayName("Teacher_Specilist")</th>
+                                        <th>@Html.DisplayName("Teacher_BirthOfDate")</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+    <tbody>
+        @foreach (var item in Model.Teachers) {
+        <tr>
+             <td>
+                <div class="form-check">
+                                                <input type="checkbox" class="form-check-input">
+                                                <label class="form-check-label">@item.Teacher_Id</label>
+                                            </div>
+                 
+               
+                </td>
+             <td ><img src="~/images/@item.Teacher_Image" style="width:64px;" class="img-thumbnail"/> </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher_Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher_Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher_Specilist)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher_BirthOfDate)
+            </td>
+            <td>
+               @* |*@
+                @*<a asp-action="Details" asp-route-id="@item.Teacher_Id">Details</a> |*@
+                
+                 <div class="dropdown">
+                                                <a asp-controller="Teashers" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="flaticon-more-button-of-three-dots"></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a  asp-action="Details" asp-route-id="@item.Teacher_Id" class="fas fa-times text-orange-red">Details</a>
+                                                    <a  asp-action="Edit" asp-route-id="@item.Teacher_Id" class="fas fa-cogs text-dark-pastel-green">Edit</a>
+                                                    <form asp-action="Delete" asp-controller="Teachers" method="post" asp-route-id="@item.Teacher_Id">
+                                                        <button type="submit" onclick="return confirm('Are you want to delete this teacher ?')" class="btn btn-outline-danger"><i class="fa fa-trash"></i>Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+            </td>
+        </tr>}
     </tbody>
+    
 </table>
+</div>
+</div></div>

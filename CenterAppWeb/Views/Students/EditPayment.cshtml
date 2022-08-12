@@ -1,0 +1,33 @@
+﻿@using CenterApp.Core.Models;
+@model StudentPayments;
+<div class="container text-center">
+
+    <h1>Student Payment</h1>
+    <form method="post" asp-action="EditPayment">
+
+        <input hidden asp-for="Id"/>
+        <div class="form-group">
+            <span>Material</span>
+            <select asp-for="Matrial_Id"
+                    class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Materials, "Matrial_Id", "Matrial_Name",Model.Matrial_Id))">
+            </select>
+        </div>
+        <div class="form-group">
+            <span>Price</span>
+            <input class="form-control" asp-for="Price" />
+        </div>
+        <div class="form-group">
+            <span>Date</span>
+            <input class="form-control" asp-for="Date" type="date" />
+        </div>
+        <div class="form-group">
+            <span>Is Paid</span>
+            <input type="checkbox" asp-for="IsPaid" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+
+</div>

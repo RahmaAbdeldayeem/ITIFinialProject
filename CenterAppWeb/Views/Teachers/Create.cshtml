@@ -1,58 +1,156 @@
-﻿@model CenterApp.Core.Models.Teacher
-
+﻿@model TeacherStageMatrialVM
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="card ui-tab-card">
+    <div class="card-body">
+        <div class="heading-layout1 mg-b-25">
+            <div class="item-title">
+                <h3>Default Tab</h3>
+            </div>
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button"
+                   data-toggle="dropdown" aria-expanded="false">...</a>
 
-<h4>Teacher</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Teacher_Name" class="control-label"></label>
-                <input asp-for="Teacher_Name" class="form-control" />
-                <span asp-validation-for="Teacher_Name" class="text-danger"></span>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Teacher_Phone" class="control-label"></label>
-                <input asp-for="Teacher_Phone" class="form-control" />
-                <span asp-validation-for="Teacher_Phone" class="text-danger"></span>
+        </div>
+        <div class="basic-tab">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">Personal Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-selected="false">Add Subject </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-selected="false">Groups</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                    <form asp-action="Create" class="new-added-form" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <label asp-for="Teacher.Teacher_Name" class="control-label"></label>
+                                <input asp-for="Teacher.Teacher_Name" class="form-control" />
+                                <span asp-validation-for="Teacher.Teacher_Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <label asp-for="Teacher.Teacher_Phone" class="control-label"></label>
+                                <input asp-for="Teacher.Teacher_Phone" class="form-control" />
+                                <span asp-validation-for="Teacher.Teacher_Phone" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <label asp-for="Teacher.Teacher_Email" class="control-label"></label>
+                                <input asp-for="Teacher.Teacher_Email" class="form-control" />
+                                <span asp-validation-for="Teacher.Teacher_Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <label asp-for="Teacher.Teacher_Specilist" class="control-label"></label>
+                                <input asp-for="Teacher.Teacher_Specilist" class="form-control" />
+                                <span asp-validation-for="Teacher.Teacher_Specilist" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <label asp-for="Teacher.Teacher_BirthOfDate" class="control-label"></label>
+                                <input asp-for="Teacher.Teacher_BirthOfDate" class="form-control" />
+                                <span asp-validation-for="Teacher.Teacher_BirthOfDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-xl-6 col-12 form-group mg-t-30">
+                                @*<label asp-for="Teacher.Teacher_Image" class="control-label"></label>
+                                <input asp-for="Teacher.Teacher_Image" class="form-control" />
+                                <span asp-validation-for="Teacher.Teacher_Image" class="text-danger"></span>*@
+                                <label asp-for="file" class="text-dark-medium"></label>
+                                <input asp-for="file" type="file" class="form-control-file">
+                                <span asp-validation-for="file" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12 form-group mg-t-8">
+
+                                <button type="submit" value="Create" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                                <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="tab2" role="tabpanel">
+                    <form asp-action="CreateMatrial" asp-controller="Teachers" method="Post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Level_Id" class="control-label"></label>
+                            <select asp-for="Level_Id" class="form-control" asp-items="ViewBag.Level_Id"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Stage_Id" class="control-label"></label>
+                            <select asp-for="Stage_Id" class="form-control" asp-items="ViewBag.Stage_Id"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Matrial_Id" class="control-label"></label>
+                            <select asp-for="Matrial_Id" class="form-control" asp-items="ViewBag.Matrial_Id"></select>
+                        </div>
+                        <input type="hidden" asp-for="Teacher.Teacher_Id" />
+
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" />
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="tab3" role="tabpanel">
+                    <p>
+                        add group
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Teacher_Email" class="control-label"></label>
-                <input asp-for="Teacher_Email" class="form-control" />
-                <span asp-validation-for="Teacher_Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Teacher_Specilist" class="control-label"></label>
-                <input asp-for="Teacher_Specilist" class="form-control" />
-                <span asp-validation-for="Teacher_Specilist" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Teacher_Image" class="control-label"></label>
-                <input asp-for="Teacher_Image" class="form-control" />
-                <span asp-validation-for="Teacher_Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Teacher_BirthOfDate" class="control-label"></label>
-                <input asp-for="Teacher_BirthOfDate" class="form-control" />
-                <span asp-validation-for="Teacher_BirthOfDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getSubCategoryListByCategoryId();
+        })
+        $("#Level_Id").change(function () {
+            getSubCategoryListByCategoryId();
+        });
+        var getSubCategoryListByCategoryId = function () {
+            $.ajax({
+                url: '@Url.Action("GetSubCategoryByCategoryId","Home")',
+                type: 'GET',
+                data: {
+                    categoryId: $('#Level_Id').val(),
+                },
+                success: function (data) {
+                    $('#Stage_Id').find('option').remove()
+                    $(data).each({
+                        function(index, item) {
+                            $('#Stage_Id').append('
+                                < option value = "' + item.StageList);
+                $('#Material_Id').find('option').remove();
+                            $(data).each(
+                                function (index, item) {
+                                    $('#Material_Id').append('
+                                        < option value = "' + item.MatrialList);
+                });
+                        },
+                        error: function () {
+                        }
+                    });
+                }
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    }

@@ -22,7 +22,7 @@ namespace CenterAppWeb.Controllers
         // GET: TeacherMatrials
         public async Task<IActionResult> Index()
         {
-            var centerDBContext = _context.TeacherMatrial.Include(t => t.Matrial).Include(t => t.Stage).Include(t => t.Teacher);
+            var centerDBContext = _context.TeacherMatrial.Include(t => t.Stage).Include(t => t.Matrial).Include(t => t.Teacher);
             return View(await centerDBContext.ToListAsync());
         }
 

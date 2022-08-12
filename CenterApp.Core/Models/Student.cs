@@ -21,6 +21,7 @@ namespace CenterApp.Core.Models
         public int Stage_id { get; set; }
         public virtual Stage Stage { get; set; }
         public ICollection<StudentGroup> StudentGroup { get; set; }
+        public ICollection<StudentPayments> StudentPayments { get; set; }
 
     }
 }

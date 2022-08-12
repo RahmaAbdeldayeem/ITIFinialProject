@@ -10,9 +10,9 @@ public class Teacher
     public string Teacher_Phone { get; set; }
     public string Teacher_Email { get; set; }
     public string Teacher_Specilist { get; set; }
-    public string Teacher_Image { get; set; }
+    public string? Teacher_Image { get; set; }
     public DateTime Teacher_BirthOfDate { get; set; }
-    public ICollection<Group> Groups { get; set; }
-    public IList<TeacherMatrial> TeacherMatrial { get; set; }
+    public ICollection<Group>? Groups { get; set; }
+    public IList<TeacherMatrial>? TeacherMatrial { get; set; }
 
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CenterApp.Core.Models;
 using CenterApp.Infrasturcture.Data;
+using CenterAppWeb.ViewModel;
 
 namespace CenterAppWeb.Controllers
 {
@@ -42,7 +43,10 @@ namespace CenterAppWeb.Controllers
                 return NotFound();
             }
 
+            // ViewBag.IsPaid || MaterialId || studentId 
+
             return View(student);
+
         }
 
         // GET: Students/Create
@@ -155,14 +159,103 @@ namespace CenterAppWeb.Controllers
             {
                 _context.Students.Remove(student);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(int id)
         {
-          return (_context.Students?.Any(e => e.Student_Id == id)).GetValueOrDefault();
+            return (_context.Students?.Any(e => e.Student_Id == id)).GetValueOrDefault();
         }
+
+
+        [HttpGet]
+        public IActionResult payForSupject(int id)
+        {
+            var materials = _context.Matrials.ToList();
+            var students = _context.Students.ToList();
+            ViewBag.Materials = materials;
+            ViewBag.Students = students;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult payForSupject(PaymentVM model)
+        {
+            var materials = _context.Matrials.ToList();
+            var students = _context.Students.ToList();
+            ViewBag.Materials = materials;
+            ViewBag.Students = students;
+            _context.StudentPayments.Add(new StudentPayments
+            {
+                Matrial_Id = model.MateriaId,
+                Price = model.Price,
+                Student_Id = model.StudentId,
+                IsPaid = model.IsPaid,
+                Date = model.Date
+            });
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult GetPaymentDetails(int studentId)
+        {
+            ViewBag.Materials = _context.Matrials.ToList();
+            List<PaymentStatus> statusModels = _context.StudentPayments
+                .Where(s => s.Student_Id == studentId).Include(d => d.Matrial).Select(c => new PaymentStatus
+                {
+                    Id = c.Id,
+                    IsPaid = c.IsPaid,
+                    MaterialName = c.Matrial.Matrial_Name,
+                    Price = c.Price,
+                    Date = c.Date.ToString("MM")
+                }).ToList();
+
+            return View(statusModels);
+        }
+
+        
+        public IActionResult DeletePayment(int id)
+        {
+            int stdId = 0;
+            var payment = _context.StudentPayments.FirstOrDefault(d => d.Id == id);
+            stdId = payment.Student_Id;
+            _context.StudentPayments.Remove(payment);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(GetPaymentDetails), new { studentId = stdId });
+        }
+
+        [HttpGet]
+        public IActionResult EditPayment(int id)
+        {
+            var materials = _context.Matrials.ToList();
+            var students = _context.Students.ToList();
+            ViewBag.Materials = materials;
+            ViewBag.Students = students;
+            StudentPayments studentP = _context.StudentPayments.FirstOrDefault(d => d.Id == id);
+            return View(studentP);
+
+        }
+        [HttpPost]
+        public IActionResult EditPayment(StudentPayments payment)
+        {
+            var materials = _context.Matrials.ToList();
+            var students = _context.Students.ToList();
+            ViewBag.Materials = materials;
+            ViewBag.Students = students;
+            StudentPayments studentP = _context.StudentPayments.FirstOrDefault(d => d.Id == payment.Id);
+            studentP.Matrial_Id = payment.Matrial_Id;
+            studentP.Price = payment.Price;
+            studentP.IsPaid = payment.IsPaid;
+            studentP.Date = payment.Date;
+
+            _context.SaveChanges();
+            return RedirectToAction(nameof(GetPaymentDetails), new { studentId = studentP.Student_Id });
+
+        }
+
+
+
+
     }
 }
