@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7l05iGeaiOFeHUAFg/u32TitzXvj8p8CHt/aA9uDLzs=",
+  "Hash": "NCywtnUMrw+SV5awcXD7CdiQt5F7yObDZ+fb/B93BOA=",
   "Source": "CenterAppWeb",
   "BasePath": "_content/CenterAppWeb",
   "Mode": "Default",
@@ -389,6 +389,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\fonts\\Flaticond41d.eot"
+    },
+    {
+      "Identity": "D:\\ITI Projects\\Project\\ITIFinialProject\\CenterAppWeb\\wwwroot\\images\\Hossam.jpeg",
+      "SourceId": "CenterAppWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI Projects\\Project\\ITIFinialProject\\CenterAppWeb\\wwwroot\\",
+      "BasePath": "_content/CenterAppWeb",
+      "RelativePath": "images/Hossam.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Hossam.jpeg"
     },
     {
       "Identity": "D:\\ITI Projects\\Project\\ITIFinialProject\\CenterAppWeb\\wwwroot\\images\\sort_asc.html",

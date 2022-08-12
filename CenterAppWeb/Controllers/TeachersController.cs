@@ -15,13 +15,13 @@ namespace CenterAppWeb.Controllers
     public class TeachersController : Controller
     {
         private readonly CenterDBContext _context;
+        private readonly IWebHostEnvironment _hosting;
 
-        public IHostEnvironment Hosting { get; }
 
-        public TeachersController(CenterDBContext context, IHostEnvironment hosting)
+        public TeachersController(CenterDBContext context, IWebHostEnvironment hosting)
         {
             _context = context;
-            Hosting = hosting;
+            _hosting = hosting;
         }
 
         // GET: Teachers
@@ -38,19 +38,19 @@ namespace CenterAppWeb.Controllers
             teacherSearchIndexVM.Teachers = await _context.Teacher.ToListAsync();
             if (teacherSearchIndexVM.SearchByID is not null)
             {
-                teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Id == teacherSearchIndexVM.SearchByID).ToList();
+                teacherSearchIndexVM.Teachers = teacherSearchIndexVM.Teachers.Where(x => x.Teacher_Id == teacherSearchIndexVM.SearchByID).ToList();
             }
             if (!String.IsNullOrEmpty(teacherSearchIndexVM.SearchByName))
-                teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Name.ToLower()
+                teacherSearchIndexVM.Teachers = teacherSearchIndexVM.Teachers.Where(x => x.Teacher_Name.ToLower()
                 .Contains(teacherSearchIndexVM.SearchByName.ToLower())).ToList();
             if (!String.IsNullOrEmpty(teacherSearchIndexVM.SearchByPhone))
-                teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Phone.ToLower()
+                teacherSearchIndexVM.Teachers = teacherSearchIndexVM.Teachers.Where(x => x.Teacher_Phone.ToLower()
                .Contains(teacherSearchIndexVM.SearchByPhone.ToLower())).ToList();
             if (teacherSearchIndexVM.SearchBySubject is not null)
             {
                 var matrialTeachers = _context.TeacherMatrial.Where(x => x.Matrial_Id == teacherSearchIndexVM.SearchBySubject).ToList();
                 foreach (var item in matrialTeachers)
-                    teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Id == item.Teacher_Id).ToList();
+                    teacherSearchIndexVM.Teachers = teacherSearchIndexVM.Teachers.Where(x => x.Teacher_Id == item.Teacher_Id).ToList();
             }
 
             return View(teacherSearchIndexVM);
@@ -100,16 +100,18 @@ namespace CenterAppWeb.Controllers
                 string fileimage = String.Empty;
                 if (teacherStageMatrial.file != null)
                 {
-                    string images = Path.Combine(Hosting.ContentRootPath, "images");
+                    string images = Path.Combine(_hosting.WebRootPath, "images");
                     fileimage = teacherStageMatrial.file.FileName;
                     string fullpathimage = Path.Combine(images, fileimage);
-                    teacherStageMatrial.file.CopyTo(new FileStream(fullpathimage, FileMode.Create));
+                    using (var stream = new FileStream(fullpathimage, FileMode.Create))
+                    {
+                        teacherStageMatrial.file.CopyTo(stream);
+                    }
+
                     teacherStageMatrial.Teacher.Teacher_Image = fileimage;
                 }
 
-
                 _context.Teacher.Add(teacherStageMatrial.Teacher);
-
                 await _context.SaveChangesAsync();
                 ViewBag.Message = "Teacher Is Added SuccessFull .... Please Add him to Subject ";
                 return View(teacherStageMatrial);
@@ -131,11 +133,6 @@ namespace CenterAppWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateMatrial(TeacherStageMatrialVM teacherStageMatrial)
         {
-            // add code to add matrial id , stage id in TeacherMatrial Table 
-            // handle nullable variable 
-            //1- check this value is null or not 
-            //2- if equal null return to view create 
-            //3- if not equal null define new variable and equal it 
 
             var teacherMatrial = new TeacherMatrial() { Matrial_Id = teacherStageMatrial.Matrial_Id ?? 0, Stage_Id = teacherStageMatrial.Stage_Id ?? 0, Teacher_Id = teacherStageMatrial.Teacher.Teacher_Id };
             _context.TeacherMatrial.Add(teacherMatrial);

@@ -14,20 +14,20 @@ namespace CenterAppWeb.Controllers
     public class StudentsController : Controller
     {
         private readonly CenterDBContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public StudentsController(CenterDBContext context)
+        public StudentsController(CenterDBContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
         }
 
         //new
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var Students = await _context.Students.ToListAsync();
-            ViewBag.Students = Students;
             StudentsSearchIndexVM studentsSearch = new StudentsSearchIndexVM();
-            studentsSearch.Students = Students;
+            studentsSearch.Students = await _context.Students.Include(x => x.Stage).ToListAsync();
             return View(studentsSearch);
         }
 
@@ -49,10 +49,10 @@ namespace CenterAppWeb.Controllers
             return View(studentsSearch);
         }
 
-      
+
         public IActionResult Details()
         {
-           // ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name");
+            // ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name");
             //ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
             return View();
         }
@@ -90,57 +90,46 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( StudentStageMaterialVM studentstagematerialvm)
+        public async Task<IActionResult> Create(StudentStageMaterialVM studentstagematerialvm)
         {
 
             ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name");
             ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
             ViewData["Material_id"] = new SelectList(_context.Stages, "Material_Id", "Material_Name");
-            try
+            if (ModelState.IsValid)
             {
-
-
-                if (ModelState.IsValid)
+                string fileimage = String.Empty;
+                if (studentstagematerialvm.File != null)
                 {
-                    IFormFile file = (Request.Form.Files["imageFile"]);
-
-                    string folderPath = AppDomain.CurrentDomain.BaseDirectory+"Images";
-                    if (!Directory.Exists(folderPath)) { 
-                    
-                    Directory.CreateDirectory(folderPath);
-                    }
-                    Student student = studentstagematerialvm.Student;
-                    student.Student_Image =Path.Combine(folderPath,file.FileName);
-                    using (Stream fileStream = new FileStream(student.Student_Image, FileMode.Create))
+                    string images = Path.Combine(_hostEnvironment.WebRootPath, "images");
+                    fileimage = studentstagematerialvm.File.FileName;
+                    string fullpathimage = Path.Combine(images, fileimage);
+                    using (var stream = new FileStream(fullpathimage, FileMode.Create))
                     {
-                        await file.CopyToAsync(fileStream);
+                        studentstagematerialvm.File.CopyTo(stream);
                     }
 
-                    _context.Students.Add(studentstagematerialvm.Student);
-                  
-                    await _context.SaveChangesAsync();
-                    return View(studentstagematerialvm);
+                    studentstagematerialvm.Student.Student_Image = fileimage;
                 }
+                _context.Students.Add(studentstagematerialvm.Student);
 
-                foreach (var item in ModelState.Values)
-                {
-                    foreach (var item2 in item.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, item2.ErrorMessage);
-                    }
-                }
-                // ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name", student.Stage_id);
-                //ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
-                return View(studentstagematerialvm);
-            }
-                catch(Exception ex)
-            {
-                ex = ex;
+                await _context.SaveChangesAsync();
                 return View(studentstagematerialvm);
             }
 
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var item2 in item.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, item2.ErrorMessage);
+                }
+            }
+            // ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name", student.Stage_id);
+            //ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
+            return View(studentstagematerialvm);
 
         }
+
 
         // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -156,7 +145,7 @@ namespace CenterAppWeb.Controllers
                 return NotFound();
             }
             ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name", student.Stage_id);
-          //  ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
+            //  ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
             return View(student);
         }
 
@@ -193,7 +182,7 @@ namespace CenterAppWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Stage_id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name", student.Stage_id);
-           // ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
+            // ViewData["Level_id"] = new SelectList(_context.Stages, "Level_Id", "Level_Name");
             return View(student);
         }
 
@@ -230,14 +219,14 @@ namespace CenterAppWeb.Controllers
             {
                 _context.Students.Remove(student);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(int id)
         {
-          return (_context.Students?.Any(e => e.Student_Id == id)).GetValueOrDefault();
+            return (_context.Students?.Any(e => e.Student_Id == id)).GetValueOrDefault();
         }
 
         [HttpGet]

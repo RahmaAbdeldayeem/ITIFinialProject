@@ -1,5 +1,4 @@
-﻿
-@model StudentsSearchIndexVM 
+﻿@model StudentsSearchIndexVM 
 
 @{
     ViewData["Title"] = "Index";
@@ -74,7 +73,7 @@
                                 </thead>
 
     <tbody>
-@foreach (Student item in ViewBag.Students) {
+@foreach (Student item in Model.Students) {
         <tr  height="150">
             
                 <td>
@@ -85,8 +84,8 @@
                 </td>
             <td>
                 
-              <img src="@Url.Content("~/images/"+item.Student_Image)" width="150" height="150"/>
-            @*@Html.Image(@Model.Student_Image,@Model.Students)*@
+              <img src="~/images/@item.Student_Image" width="150" height="150"/>
+            
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Student_Name)
@@ -112,17 +111,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Student_ParentPhone)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Stage.Stage_Name)
-            </td>*@
-            @*<td>
-                <a asp-action="Edit" asp-route-id="@item.Student_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Student_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Student_Id">Delete</a>
-            </td>*@
             <td>
-               @* |*@
-                @*<a asp-action="Details" asp-route-id="@item.Teacher_Id">Details</a> |*@
+                @Html.DisplayFor(modelItem => item.Stage.Stage_Name)
+            </td>
+           
+            <td>
+               
                 
                  <div class="dropdown">
                   <a asp-controller="Teashers" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -133,7 +127,6 @@
                       <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Student_Id"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                       <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Student_Id"><i class="fas fa-redo-alt text-orange-peel"></i>Details</a>
                       <a class="dropdown-item" asp-action="payForSupject" asp-route-id="@item.Student_Id"><i class="fas fa-redo-alt text-orange-peel"></i>Pay</a>
-                     @* @Html.ActionLink("Delete","Delete",new{id=item.Student_Id},new{@class="dropdown-item fas fa-times text-orange-red",onclick=$"return confirm('Are you sure to Delete!!!! {item.Student_Name}')"})*@
                   </div>
                   </div>
             </td>
