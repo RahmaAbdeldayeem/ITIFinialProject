@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CenterApp.Core.Models;
 using CenterApp.Infrasturcture.Data;
+using CenterAppWeb.ViewModel;
+using System.IO;
 
 namespace CenterAppWeb.Controllers
 {
@@ -14,17 +16,44 @@ namespace CenterAppWeb.Controllers
     {
         private readonly CenterDBContext _context;
 
-        public TeachersController(CenterDBContext context)
+        public IHostEnvironment Hosting { get; }
+
+        public TeachersController(CenterDBContext context, IHostEnvironment hosting)
         {
             _context = context;
+            Hosting = hosting;
         }
 
         // GET: Teachers
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return _context.Teacher != null ? 
-                          View(await _context.Teacher.ToListAsync()) :
-                          Problem("Entity set 'CenterDBContext.Teacher'  is null.");
+            TeacherSearchIndexVM teacherSearchIndexVM = new TeacherSearchIndexVM();
+            teacherSearchIndexVM.Teachers = await _context.Teacher.ToListAsync();
+            return View(teacherSearchIndexVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(TeacherSearchIndexVM teacherSearchIndexVM)
+        {
+            teacherSearchIndexVM.Teachers = await _context.Teacher.ToListAsync();
+            if (teacherSearchIndexVM.SearchByID is not null)
+            {
+                teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Id == teacherSearchIndexVM.SearchByID).ToList();
+            }
+            if (!String.IsNullOrEmpty(teacherSearchIndexVM.SearchByName))
+                teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Name.ToLower()
+                .Contains(teacherSearchIndexVM.SearchByName.ToLower())).ToList();
+            if (!String.IsNullOrEmpty(teacherSearchIndexVM.SearchByPhone))
+                teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Phone.ToLower()
+               .Contains(teacherSearchIndexVM.SearchByPhone.ToLower())).ToList();
+            if (teacherSearchIndexVM.SearchBySubject is not null)
+            {
+                var matrialTeachers = _context.TeacherMatrial.Where(x => x.Matrial_Id == teacherSearchIndexVM.SearchBySubject).ToList();
+                foreach (var item in matrialTeachers)
+                    teacherSearchIndexVM.Teachers = _context.Teacher.Where(x => x.Teacher_Id == item.Teacher_Id).ToList();
+            }
+
+            return View(teacherSearchIndexVM);
         }
 
         // GET: Teachers/Details/5
@@ -48,7 +77,10 @@ namespace CenterAppWeb.Controllers
         // GET: Teachers/Create
         public IActionResult Create()
         {
-            return View();
+            ViewBag.Matrial_Id = new SelectList(_context.Matrials, "Matrial_Id", "Matrial_Name");
+            ViewBag.Stage_Id = new SelectList(_context.Stages, "Stage_Id", "Stage_Name");
+            ViewBag.Level_Id = new SelectList(_context.Levels, "Level_Id", "Level_Name");
+            return View(new TeacherStageMatrialVM());
         }
 
         // POST: Teachers/Create
@@ -56,17 +88,63 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Teacher teacher)
+        public async Task<IActionResult> Create(TeacherStageMatrialVM teacherStageMatrial)
         {
+            ViewData["Matrial_Id"] = new SelectList(_context.Matrials, "Matrial_Id", "Matrial_Name");
+            ViewData["Stage_Id"] = new SelectList(_context.Stages, "Stage_Id", "Stage_Name");
+            ViewData["Level_Id"] = new SelectList(_context.Levels, "Level_Id", "Level_Name");
+
             if (ModelState.IsValid)
             {
-                _context.Add(teacher);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(teacher);
-        }
 
+                string fileimage = String.Empty;
+                if (teacherStageMatrial.file != null)
+                {
+                    string images = Path.Combine(Hosting.ContentRootPath, "images");
+                    fileimage = teacherStageMatrial.file.FileName;
+                    string fullpathimage = Path.Combine(images, fileimage);
+                    teacherStageMatrial.file.CopyTo(new FileStream(fullpathimage, FileMode.Create));
+                    teacherStageMatrial.Teacher.Teacher_Image = fileimage;
+                }
+
+
+                _context.Teacher.Add(teacherStageMatrial.Teacher);
+
+                await _context.SaveChangesAsync();
+                ViewBag.Message = "Teacher Is Added SuccessFull .... Please Add him to Subject ";
+                return View(teacherStageMatrial);
+            }
+            foreach (var item in ModelState.Values)
+            {
+                foreach (var item2 in item.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, item2.ErrorMessage);
+
+                }
+
+            }
+
+            ViewBag.Message = "Error Please Add Teacher Again";
+            return View(teacherStageMatrial);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateMatrial(TeacherStageMatrialVM teacherStageMatrial)
+        {
+            // add code to add matrial id , stage id in TeacherMatrial Table 
+            // handle nullable variable 
+            //1- check this value is null or not 
+            //2- if equal null return to view create 
+            //3- if not equal null define new variable and equal it 
+
+            var teacherMatrial = new TeacherMatrial() { Matrial_Id = teacherStageMatrial.Matrial_Id ?? 0, Stage_Id = teacherStageMatrial.Stage_Id ?? 0, Teacher_Id = teacherStageMatrial.Teacher.Teacher_Id };
+            _context.TeacherMatrial.Add(teacherMatrial);
+            await _context.SaveChangesAsync();
+
+
+            return Json(teacherMatrial);
+            //return RedirectToAction(nameof(Index));
+        }
         // GET: Teachers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -88,7 +166,7 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Teacher_Id,Teacher_Name,Teacher_Phone,Teacher_Email,Teacher_Specilist,Teacher_Image,Teacher_BirthOfDate")] Teacher teacher)
+        public async Task<IActionResult> Edit(int id, Teacher teacher)
         {
             if (id != teacher.Teacher_Id)
             {
@@ -119,22 +197,22 @@ namespace CenterAppWeb.Controllers
         }
 
         // GET: Teachers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Teacher == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null || _context.Teacher == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var teacher = await _context.Teacher
-                .FirstOrDefaultAsync(m => m.Teacher_Id == id);
-            if (teacher == null)
-            {
-                return NotFound();
-            }
+        //    var teacher = await _context.Teacher
+        //        .FirstOrDefaultAsync(m => m.Teacher_Id == id);
+        //    if (teacher == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(teacher);
-        }
+        //    return View(teacher);
+        //}
 
         // POST: Teachers/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -150,14 +228,15 @@ namespace CenterAppWeb.Controllers
             {
                 _context.Teacher.Remove(teacher);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool TeacherExists(int id)
         {
-          return (_context.Teacher?.Any(e => e.Teacher_Id == id)).GetValueOrDefault();
+            return (_context.Teacher?.Any(e => e.Teacher_Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -163,7 +163,7 @@ namespace CenterApp.Infrasturcture.Migrations
                     b.Property<DateTime>("Student_RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 27, 18, 21, 39, 992, DateTimeKind.Local).AddTicks(1931));
+                        .HasDefaultValue(new DateTime(2022, 8, 12, 6, 12, 14, 40, DateTimeKind.Local).AddTicks(9400));
 
                     b.Property<string>("Student_StdPhone")
                         .IsRequired()
@@ -189,6 +189,38 @@ namespace CenterApp.Infrasturcture.Migrations
                     b.HasIndex("Group_Id");
 
                     b.ToTable("StudentGroup");
+                });
+
+            modelBuilder.Entity("CenterApp.Core.Models.StudentPayments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Matrial_Id")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Student_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Matrial_Id");
+
+                    b.HasIndex("Student_Id");
+
+                    b.ToTable("StudentPayments");
                 });
 
             modelBuilder.Entity("CenterApp.Core.Models.Teacher", b =>
@@ -318,6 +350,25 @@ namespace CenterApp.Infrasturcture.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("CenterApp.Core.Models.StudentPayments", b =>
+                {
+                    b.HasOne("CenterApp.Core.Models.Matrial", "Matrial")
+                        .WithMany("StudentPayments")
+                        .HasForeignKey("Matrial_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CenterApp.Core.Models.Student", "Student")
+                        .WithMany("StudentPayments")
+                        .HasForeignKey("Student_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Matrial");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("CenterApp.Core.Models.TeacherMatrial", b =>
                 {
                     b.HasOne("CenterApp.Core.Models.Matrial", "Matrial")
@@ -361,6 +412,8 @@ namespace CenterApp.Infrasturcture.Migrations
                 {
                     b.Navigation("LevelMatrial");
 
+                    b.Navigation("StudentPayments");
+
                     b.Navigation("TeacherMatrial");
                 });
 
@@ -374,6 +427,8 @@ namespace CenterApp.Infrasturcture.Migrations
             modelBuilder.Entity("CenterApp.Core.Models.Student", b =>
                 {
                     b.Navigation("StudentGroup");
+
+                    b.Navigation("StudentPayments");
                 });
 
             modelBuilder.Entity("CenterApp.Core.Models.Teacher", b =>

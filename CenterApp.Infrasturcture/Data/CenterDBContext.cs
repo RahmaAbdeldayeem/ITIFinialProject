@@ -68,6 +68,9 @@ public class CenterDBContext : DbContext
         modelBuilder.Entity<StudentGroup>().HasOne<Group>(x => x.Group).WithMany(x => x.StudentGroup).HasForeignKey(x => x.Group_Id);
         modelBuilder.Entity<Student>().HasOne<Stage>(x => x.Stage).WithMany(x => x.Students)
             .HasForeignKey(x => x.Stage_id);
+        modelBuilder.Entity<StudentPayments>().HasKey(d => d.Id);
+        modelBuilder.Entity<StudentPayments>().HasOne(s => s.Student).WithMany(d => d.StudentPayments).HasForeignKey(d => d.Student_Id);
+        modelBuilder.Entity<StudentPayments>().HasOne(s => s.Matrial).WithMany(d => d.StudentPayments).HasForeignKey(d => d.Matrial_Id);
 
     }
 
@@ -80,5 +83,5 @@ public class CenterDBContext : DbContext
     public DbSet<Group> Group { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<StudentGroup> StudentGroup { get; set; }
-
+    public DbSet<StudentPayments> StudentPayments { get; set; }
 }

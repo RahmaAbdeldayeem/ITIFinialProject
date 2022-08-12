@@ -41,6 +41,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Stage)
+            </th>  
+            <th>
+                Payments
             </th>
             <th></th>
         </tr>
@@ -77,6 +80,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stage.Stage_Name)
+            </td>
+            <td>
+                <a asp-action="payForSupject" asp-route-id="@item.Student_Id">Pay For Supject</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Student_Id">Edit</a> |
