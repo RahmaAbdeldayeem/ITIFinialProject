@@ -1,56 +1,93 @@
-﻿@model IEnumerable<CenterApp.Core.Models.Student>
+﻿
+@model StudentsSearchIndexVM 
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-
+<script>
+    ()=>console.log('started')();
+</script>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_BirthOfDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_RegisterDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_StdPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Student_ParentPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stage)
-            </th>  
-            <th>
-                Payments
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+
+<div class="card height-auto">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Students Data</h3>
+                            </div>
+                           <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" 
+                                data-toggle="dropdown" aria-expanded="false">...</a>
+        
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="mg-b-20">
+                            <div class="row gutters-8">
+                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by ID ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Phone ..." class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
+                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                         <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th> 
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">@Html.DisplayName("Student_Id")</label>
+                                            </div>
+
+                                            
+                                        </th>
+                                        <th>@Html.DisplayName("Student_Image")</th>
+                                        <th>@Html.DisplayName("Student_Name")</th>
+                                        <th>@Html.DisplayName("Student_Address")</th>
+                                        <th>@Html.DisplayName("Gender")</th>
+                                        <th>@Html.DisplayName("Student_BirthOfDate")</th>
+                                        
+                                        <th>@Html.DisplayName("Student_RegisterDate")</th>
+                                        <th>@Html.DisplayName("Student_Email")</th>
+                                       <th> @Html.DisplayName("Student_StdPhone")</th>
+                                       <th> @Html.DisplayName("Student_ParentPhone")</th>
+                                       <th>@Html.DisplayName("Stage")</th>
+                                       <th></th>
+                                    </tr>
+                                </thead>
+
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+@foreach (Student item in ViewBag.Students) {
+        <tr  height="150">
+            
+                <td>
+                <div class="form-check">
+                <input type="checkbox" class="form-check-input">
+                <label class="form-check-label">@item.Student_Id</label>
+                </div>
+                </td>
+            <td>
+                
+              <img src="@Url.Content("~/images/"+item.Student_Image)" width="150" height="150"/>
+            @*@Html.Image(@Model.Student_Image,@Model.Students)*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Student_Name)
             </td>
@@ -58,10 +95,10 @@
                 @Html.DisplayFor(modelItem => item.Student_Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student_BirthOfDate)
+                @(!item.Gender? "Female":"Male")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Gender)
+                @Html.DisplayFor(modelItem => item.Student_BirthOfDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Student_RegisterDate)
@@ -70,26 +107,41 @@
                 @Html.DisplayFor(modelItem => item.Student_Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Student_Image)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Student_StdPhone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Student_ParentPhone)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Stage.Stage_Name)
-            </td>
-            <td>
-                <a asp-action="payForSupject" asp-route-id="@item.Student_Id">Pay For Supject</a>
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 <a asp-action="Edit" asp-route-id="@item.Student_Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Student_Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Student_Id">Delete</a>
+            </td>*@
+            <td>
+               @* |*@
+                @*<a asp-action="Details" asp-route-id="@item.Teacher_Id">Details</a> |*@
+                
+                 <div class="dropdown">
+                  <a asp-controller="Teashers" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <span class="flaticon-more-button-of-three-dots"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Student_Id"><i class="fas fa-times text-dark-orange-red"></i>Delete</a>
+                      <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Student_Id"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                      <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Student_Id"><i class="fas fa-redo-alt text-orange-peel"></i>Details</a>
+                      <a class="dropdown-item" asp-action="payForSupject" asp-route-id="@item.Student_Id"><i class="fas fa-redo-alt text-orange-peel"></i>Pay</a>
+                     @* @Html.ActionLink("Delete","Delete",new{id=item.Student_Id},new{@class="dropdown-item fas fa-times text-orange-red",onclick=$"return confirm('Are you sure to Delete!!!! {item.Student_Name}')"})*@
+                  </div>
+                  </div>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+</div>
+</div>
+
