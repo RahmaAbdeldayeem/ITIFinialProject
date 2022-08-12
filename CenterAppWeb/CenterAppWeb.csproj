@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Monikers.imagemanifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <content Include="Monikers.imagemanifest">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\fonts\Flaticon.svg" />
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\Chart.min.js" />

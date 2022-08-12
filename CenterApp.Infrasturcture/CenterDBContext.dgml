@@ -73,7 +73,7 @@
     <Link Source="Group" Target="Group.StudentGroup" Category="Contains" />
     <Link Source="Group" Target="Group.Teacher" Category="Contains" />
     <Link Source="Group" Target="Group.Teacher_Id" Category="Contains" />
-    <Link Source="Group" Target="Teacher" Category="Foreign Key" Annotations="" Bounds="956.242459669102,537.680123577414,10.0298048364529,92.9717951861426" From="Group.Teacher_Id" IsUnique="False" Label="1:*" LabelBounds="965.257429030494,576.400536666604,14.0733333333333,15.96" Name="Group -&gt; Teacher" To="Teacher.Teacher_Id" />
+    <Link Source="Group" Target="Teacher" Category="Foreign Key" Annotations="" Bounds="956.242459669102,537.679923577414,10.0298264124692,92.9719951861431" From="Group.Teacher_Id" IsUnique="False" Label="1:*" LabelBounds="965.257439818503,576.400436666604,14.0733333333333,15.96" Name="Group -&gt; Teacher" To="Teacher.Teacher_Id" />
     <Link Source="IModel" Target="Group" Category="Contains" />
     <Link Source="IModel" Target="Level" Category="Contains" />
     <Link Source="IModel" Target="LevelMatrial" Category="Contains" />
@@ -97,14 +97,14 @@
     <Link Source="Matrial" Target="Matrial.Matrial_Id" Category="Contains" />
     <Link Source="Matrial" Target="Matrial.Matrial_Name" Category="Contains" />
     <Link Source="Matrial" Target="Matrial.TeacherMatrial" Category="Contains" />
-    <Link Source="Stage" Target="Level" Category="Foreign Key" Annotations="" Bounds="293.163638947723,815.309887640449,67.4906842759848,116.305799714283" From="Stage.Level_Id" IsUnique="False" Label="1:*" LabelBounds="328.63882834022,856.49898050614,14.0733333333333,15.96" Name="Stage -&gt; Level" To="Level.Level_Id" />
+    <Link Source="Stage" Target="Level" Category="Foreign Key" Annotations="" Bounds="293.163638947723,815.309887640449,67.490684275985,116.305799714283" From="Stage.Level_Id" IsUnique="False" Label="1:*" LabelBounds="328.63882834022,856.49898050614,14.0733333333333,15.96" Name="Stage -&gt; Level" To="Level.Level_Id" />
     <Link Source="Stage" Target="Stage.Level" Category="Contains" />
     <Link Source="Stage" Target="Stage.Level_Id" Category="Contains" />
     <Link Source="Stage" Target="Stage.Stage_Id" Category="Contains" />
     <Link Source="Stage" Target="Stage.Stage_Name" Category="Contains" />
     <Link Source="Stage" Target="Stage.Students" Category="Contains" />
     <Link Source="Stage" Target="Stage.TeacherMatrial" Category="Contains" />
-    <Link Source="Student" Target="Stage" Category="Foreign Key" Annotations="" Bounds="243.346741031643,410.747949669271,13.9169716512173,197.704153674434" From="Student.Stage_id" IsUnique="False" Label="1:*" LabelBounds="254.305239073517,501.760464818792,14.0733333333332,15.9600000000002" Name="Student -&gt; Stage" To="Stage.Stage_Id" />
+    <Link Source="Student" Target="Stage" Category="Foreign Key" Annotations="" Bounds="243.346741031643,410.7476106556,13.9169955153777,197.704492688105" From="Student.Stage_id" IsUnique="False" Label="1:*" LabelBounds="254.305251005597,501.760295311956,14.0733333333332,15.9600000000002" Name="Student -&gt; Stage" To="Stage.Stage_Id" />
     <Link Source="Student" Target="Student.Gender" Category="Contains" />
     <Link Source="Student" Target="Student.Stage" Category="Contains" />
     <Link Source="Student" Target="Student.Stage_id" Category="Contains" />
@@ -118,8 +118,8 @@
     <Link Source="Student" Target="Student.Student_ParentPhone" Category="Contains" />
     <Link Source="Student" Target="Student.Student_RegisterDate" Category="Contains" />
     <Link Source="Student" Target="Student.Student_StdPhone" Category="Contains" />
-    <Link Source="StudentGroup" Target="Group" Category="Foreign Key" Annotations="" Bounds="972.68423848082,237.88,1.97154750880009,92.9217486736139" From="StudentGroup.Group_Id" IsUnique="False" Label="1:*" LabelBounds="977.670012336503,276.318449308917,14.0733333333335,15.96" Name="StudentGroup -&gt; Group" To="Group.Group_Id" />
-    <Link Source="StudentGroup" Target="Student" Category="Foreign Key" Annotations="" Bounds="518.630485038139,157.107886951498,342.796181628528,57.0536585256792" From="StudentGroup.Student_Id" IsUnique="False" Label="1:*" LabelBounds="766.341214802246,175.817406603105,14.0733333333335,15.96" Name="StudentGroup -&gt; Student" To="Student.Student_Id" />
+    <Link Source="StudentGroup" Target="Group" Category="Foreign Key" Annotations="" Bounds="972.68423848082,237.88,1.97155175225794,92.9219486736135" From="StudentGroup.Group_Id" IsUnique="False" Label="1:*" LabelBounds="977.670014458231,276.318549308917,14.0733333333335,15.96" Name="StudentGroup -&gt; Group" To="Group.Group_Id" />
+    <Link Source="StudentGroup" Target="Student" Category="Foreign Key" Annotations="" Bounds="518.630476086316,157.107886951498,342.796190580351,57.053660015586" From="StudentGroup.Student_Id" IsUnique="False" Label="1:*" LabelBounds="766.341212494354,175.817406987221,14.0733333333335,15.96" Name="StudentGroup -&gt; Student" To="Student.Student_Id" />
     <Link Source="StudentGroup" Target="StudentGroup.Group" Category="Contains" />
     <Link Source="StudentGroup" Target="StudentGroup.Group_Id" Category="Contains" />
     <Link Source="StudentGroup" Target="StudentGroup.Student" Category="Contains" />
@@ -133,9 +133,9 @@
     <Link Source="Teacher" Target="Teacher.Teacher_Name" Category="Contains" />
     <Link Source="Teacher" Target="Teacher.Teacher_Phone" Category="Contains" />
     <Link Source="Teacher" Target="Teacher.Teacher_Specilist" Category="Contains" />
-    <Link Source="TeacherMatrial" Target="Matrial" Category="Foreign Key" Annotations="" Bounds="677.341662889833,537.6802,17.4481677616583,392.728669203401" From="TeacherMatrial.Matrial_Id" IsUnique="False" Label="1:*" LabelBounds="685.840020585092,630.861791499815,14.0733333333334,15.96" Name="TeacherMatrial -&gt; Matrial" To="Matrial.Matrial_Id" />
-    <Link Source="TeacherMatrial" Target="Stage" Category="Foreign Key" Annotations="" Bounds="396.764536479309,523.320946377813,142.98807152676,90.8008799807112" From="TeacherMatrial.Stage_Id" IsUnique="False" Label="1:*" LabelBounds="469.330713082151,570.40973290261,14.0733333333333,15.96" Name="TeacherMatrial -&gt; Stage" To="Stage.Stage_Id" />
-    <Link Source="TeacherMatrial" Target="Teacher" Category="Foreign Key" Annotations="" Bounds="754.034504882749,537.6802,77.8255952961449,94.9589264017496" From="TeacherMatrial.Teacher_Id" IsUnique="False" Label="1:*" LabelBounds="794.494163330433,567.931900736284,14.0733333333333,15.96" Name="TeacherMatrial -&gt; Teacher" To="Teacher.Teacher_Id" />
+    <Link Source="TeacherMatrial" Target="Matrial" Category="Foreign Key" Annotations="" Bounds="677.341652306571,537.679961788708,17.4481783449206,392.728907414693" From="TeacherMatrial.Matrial_Id" IsUnique="False" Label="1:*" LabelBounds="685.840012730327,630.861614702371,14.0733333333334,15.96" Name="TeacherMatrial -&gt; Matrial" To="Matrial.Matrial_Id" />
+    <Link Source="TeacherMatrial" Target="Stage" Category="Foreign Key" Annotations="" Bounds="396.764536479309,523.320946377813,142.988071526761,90.8008799807111" From="TeacherMatrial.Stage_Id" IsUnique="False" Label="1:*" LabelBounds="469.330713082151,570.40973290261,14.0733333333333,15.96" Name="TeacherMatrial -&gt; Stage" To="Stage.Stage_Id" />
+    <Link Source="TeacherMatrial" Target="Teacher" Category="Foreign Key" Annotations="" Bounds="754.03430965165,537.679961788708,77.8257905272445,94.9591646130419" From="TeacherMatrial.Teacher_Id" IsUnique="False" Label="1:*" LabelBounds="794.494065714883,567.931781630637,14.0733333333333,15.96" Name="TeacherMatrial -&gt; Teacher" To="Teacher.Teacher_Id" />
     <Link Source="TeacherMatrial" Target="TeacherMatrial.Matrial" Category="Contains" />
     <Link Source="TeacherMatrial" Target="TeacherMatrial.Matrial_Id" Category="Contains" />
     <Link Source="TeacherMatrial" Target="TeacherMatrial.Stage" Category="Contains" />

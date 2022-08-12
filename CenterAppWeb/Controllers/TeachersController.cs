@@ -56,7 +56,7 @@ namespace CenterAppWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Teacher_Id,Teacher_Name,Teacher_Phone,Teacher_Email,Teacher_Specilist,Teacher_Image,Teacher_BirthOfDate")] Teacher teacher)
+        public async Task<IActionResult> Create(Teacher teacher)
         {
             if (ModelState.IsValid)
             {
